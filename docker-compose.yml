@@ -1,0 +1,12 @@
+version: '2'
+services:
+  geoffrey:
+    image: tadamo/geoffrey
+    build:
+      context: .
+    container_name: geoffrey
+  geoffrey-dev:
+    extends:
+      service: geoffrey
+    volumes:
+      - .:/usr/local/bin/geoffrey
