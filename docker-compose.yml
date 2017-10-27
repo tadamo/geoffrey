@@ -10,3 +10,4 @@ services:
       service: geoffrey
     volumes:
       - .:/usr/local/bin/geoffrey
+      - /var/run/docker.sock:/var/run/docker.sock
