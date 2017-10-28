@@ -1,13 +1,9 @@
 {
     "perl": {
         "formatter": [{
-                "image": "toolbox.acsu.buffalo.edu:5000/perl-critic",
-                "command": "echo foo"
-            },
-            {
-                "image": "toolbox.acsu.buffalo.edu:5000/perl-critic",
-                "command": "echo bar"
-            }
-        ]
+            "image": "avastsoftware/perltidy",
+            "entrypoint": "perltidy",
+            "command": "-o /dev/stdout"
+        }]
     }
 }

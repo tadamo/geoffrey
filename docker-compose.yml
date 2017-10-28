@@ -5,9 +5,12 @@ services:
     build:
       context: .
     container_name: geoffrey
-  geoffrey-dev:
+  geoffrey-dev-perl:
     extends:
       service: geoffrey
+    environment:
+      FILE: /Users/tadamo/test/perl.pl
     volumes:
       - .:/usr/local/bin/geoffrey
       - /var/run/docker.sock:/var/run/docker.sock
+      - /Users/tadamo/test/perl.pl:/Users/tadamo/test/perl.pl

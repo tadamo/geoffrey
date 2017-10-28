@@ -24,5 +24,8 @@ RUN echo "OS setup" && \
     apt-get clean && \
     gem install github-linguist && \
     echo "done"
-COPY . /usr/local/bin/geoffrey
-WORKDIR /usr/local/bin/geoffrey
+ENV GEOFFREY_HOME /usr/local/bin/geoffrey
+ENV GEOFFREY_CONFIG $GEOFFREY_HOME/config.json
+ENV PATH $GEOFFREY_HOME:$PATH
+COPY . $GEOFFREY_HOME/
+WORKDIR $GEOFFREY_HOME
