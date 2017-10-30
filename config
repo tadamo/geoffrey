@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+jq -s '.[0] * .[1]' $GEOFFREY_CONFIG $GEOFFREY_CONFIG_EXT

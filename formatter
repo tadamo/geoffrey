@@ -7,7 +7,7 @@ if [[ -z "${file_type}" ]]; then
     exit
 fi
 
-format_commands=$(cat $GEOFFREY_CONFIG | jq -rcM ".$file_type.formatter")
+format_commands=$(config | jq -rcM ".$file_type.formatter")
 if [ "$format_commands" = "null" ]; then
     echo "No format configured for $file_type."
     exit
