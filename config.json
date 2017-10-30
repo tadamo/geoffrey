@@ -6,6 +6,13 @@
                 "entrypoint": "perltidy",
                 "command": "--perl-best-practices --maximum-line-length=80"
             }
+        ],
+        "linter": [
+            {
+                "image": "tadamo/perl-critic",
+                "entrypoint": "perlcritic",
+                "command": ""
+            }
         ]
     }
 }
