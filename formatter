@@ -21,7 +21,7 @@ for formatter_row_config in $(echo $format_commands | jq -rcM '.[] | @base64'); 
     command=$(echo $formatter_row | jq -rcM '.command')
     docker pull $image
     file_in_container="/tmp/$FILE"
-    docker_run="docker run -v $FILE:$file_in_container --entrypoint=$entrypoint $image $command $file_in_container"
+    docker_run="docker run --rm -v $FILE:$file_in_container --entrypoint=$entrypoint $image $command $file_in_container"
     echo $docker_run
     file_formatted=$($docker_run)
     echo "$file_formatted" > $FILE
