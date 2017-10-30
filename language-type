@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 require 'linguist'
 for arg in ARGV
-    print Linguist::FileBlob.new(arg).language.name.downcase, "\n"
+    file_type = Linguist::FileBlob.new(arg).language.name.downcase
+    print file_type, "\n"
 end

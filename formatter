@@ -1,21 +1,29 @@
 #!/usr/bin/env bash
-set -ex
-# file=/Users/tadamo/test/perl.pl && \
-# docker run --rm \
-#   -v /var/run/docker.sock:/var/run/docker.sock \
-#   -v $(pwd):/usr/local/bin/geoffrey \
-#   -v $file:$file \
-#   -e FILE=$file \
-#   tadamo/geoffrey formatter
+#set -ex
 
 file_type=$(language-type $FILE)
+if [[ -z "${file_type}" ]]; then
+    echo "No file type determined for $FILE."
+    exit
+fi
+
 format_commands=$(cat $GEOFFREY_CONFIG | jq -rcM ".$file_type.formatter")
+if [ "$format_commands" = "null" ]; then
+    echo "No format configured for $file_type."
+    exit
+fi
+
+echo "Running the $file_type formatter on: $FILE"
 for formatter_row_config in $(echo $format_commands | jq -rcM '.[] | @base64'); do
     formatter_row=$(echo $formatter_row_config | base64 --decode)
     image=$(echo $formatter_row | jq -rcM '.image')
     entrypoint=$(echo $formatter_row | jq -rcM '.entrypoint')
     command=$(echo $formatter_row | jq -rcM '.command')
-    docker pull $image > /dev/null
-    file_formatted=$(docker run -v $FILE:$FILE --entrypoint="$entrypoint" $image $command $FILE)
+    docker pull $image
+    file_in_container="/tmp/$FILE"
+    docker_run="docker run -v $FILE:$file_in_container --entrypoint=$entrypoint $image $command $file_in_container"
+    echo $docker_run
+    file_formatted=$($docker_run)
     echo "$file_formatted" > $FILE
 done
+echo "Formatting done of: $FILE"

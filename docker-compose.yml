@@ -5,13 +5,26 @@ services:
     build:
       context: .
     container_name: geoffrey
-  geoffrey-dev-perl:
+  ###################################################################
+  ###################################################################
+  ###################################################################
+  geoffrey-formatter-dev-perl:
     extends:
       service: geoffrey
     environment:
-      FILE: /Users/tadamo/test/perl.pl
+      FILE: $PWD/samples/perl.pl
     volumes:
       - .:/usr/local/bin/geoffrey
       - /var/run/docker.sock:/var/run/docker.sock
-      - /Users/tadamo/test/perl.pl:/Users/tadamo/test/perl.pl
+      - $PWD/samples/perl.pl:$PWD/samples/perl.pl
+    command: formatter
+  geoffrey-formatter-dev-text:
+    extends:
+      service: geoffrey
+    environment:
+      FILE: $PWD/samples/text.txt
+    volumes:
+      - .:/usr/local/bin/geoffrey
+      - /var/run/docker.sock:/var/run/docker.sock
+      - $PWD/samples/text.txt:$PWD/samples/text.txt
     command: formatter

@@ -2,9 +2,9 @@
     "perl": {
         "formatter": [
             {
-                "image": "avastsoftware/perltidy",
+                "image": "tadamo/perl-critic",
                 "entrypoint": "perltidy",
-                "command": "-o /dev/stdout"
+                "command": "--perl-best-practices --maximum-line-length=80"
             }
         ]
     }
