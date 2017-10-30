@@ -1,9 +1,11 @@
 {
     "perl": {
-        "formatter": [{
-            "image": "avastsoftware/perltidy",
-            "entrypoint": "perltidy",
-            "command": "-o /dev/stdout"
-        }]
+        "formatter": [
+            {
+                "image": "avastsoftware/perltidy",
+                "entrypoint": "perltidy",
+                "command": "-o /dev/stdout"
+            }
+        ]
     }
 }

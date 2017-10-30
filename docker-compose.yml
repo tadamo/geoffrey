@@ -14,3 +14,4 @@ services:
       - .:/usr/local/bin/geoffrey
       - /var/run/docker.sock:/var/run/docker.sock
       - /Users/tadamo/test/perl.pl:/Users/tadamo/test/perl.pl
+    command: formatter
