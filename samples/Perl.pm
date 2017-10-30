@@ -1,15 +1,12 @@
 package Perl;
 use strict;
 
-
-
- use warnings;
-
+use warnings;
 
 sub foo {
 
-        my $v        = shift;
+    my $v = shift;
     return;
 }
 
-              1;
+1;

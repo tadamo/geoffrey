@@ -1,0 +1,11 @@
+function geoffrey-format {
+    for f in $*; do
+        full_path_file=$(readlink -f $f)
+        docker run \
+            --rm \
+            -v /var/run/docker.sock:/var/run/docker.sock \
+            -v $full_path_file:$full_path_file \
+            -e FILE=$full_path_file \
+            tadamo/geoffrey formatter
+    done
+}

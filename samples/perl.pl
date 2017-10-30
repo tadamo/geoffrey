@@ -2,13 +2,6 @@
 
 use strict;
 
+use warnings;
 
-
-                use warnings;
-
-
-
-
-
-
-                print "here is some perl code";
+print "here is some perl code";

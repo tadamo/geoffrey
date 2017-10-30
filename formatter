@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#set -ex
+set -ex
 # file=/Users/tadamo/test/perl.pl && \
 # docker run --rm \
 #   -v /var/run/docker.sock:/var/run/docker.sock \
