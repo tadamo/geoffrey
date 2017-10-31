@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+#set -ex
+
+file_type=$(language-type $FILE)
+if [[ -z "${file_type}" ]]; then
+    echo "No file type determined for $FILE."
+    exit
+fi
+
+linter_commands=$(config | jq -rcM ".$file_type.linter")
+if [ "$linter_commands" = "null" ]; then
+    echo "No linter configured for $file_type."
+    exit
+fi
+
+echo "Running the $file_type linter on: $FILE"
+for linter_row_config in $(echo $linter_commands | jq -rcM '.[] | @base64'); do
+    linter_row=$(echo $linter_row_config | base64 --decode)
+    image=$(echo $linter_row | jq -rcM '.image')
+    entrypoint=$(echo $linter_row | jq -rcM '.entrypoint')
+    command=$(echo $linter_row | jq -rcM '.command')
+    docker pull $image > /dev/null
+    docker_run="docker run --rm -v $FILE:$FILE --entrypoint=$entrypoint $image $command $FILE"
+    $docker_run
+done
+echo "Linting done of: $FILE"

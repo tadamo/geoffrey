@@ -11,6 +11,15 @@
             {
                 "image": "tadamo/perl-critic",
                 "entrypoint": "perlcritic",
+                "command": "--theme pbp"
+            }
+        ]
+    },
+    "yaml": {
+        "linter": [
+            {
+                "image": "particlekit/ansible-lint",
+                "entrypoint": "yamllint",
                 "command": ""
             }
         ]

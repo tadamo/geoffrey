@@ -9,3 +9,20 @@ function geoffrey-format {
             tadamo/geoffrey formatter
     done
 }
+
+function geoffrey-lint {
+    for f in $*; do
+        full_path_file=$(readlink -f $f)
+        docker run \
+            --rm \
+            -v /var/run/docker.sock:/var/run/docker.sock \
+            -v $full_path_file:$full_path_file \
+            -e FILE=$full_path_file \
+            tadamo/geoffrey linter
+    done
+}
+
+function geoffrey-clean {
+    geoffrey-format $*
+    geoffrey-lint $*
+}
