@@ -4,14 +4,14 @@
             {
                 "image": "tadamo/perl-critic",
                 "entrypoint": "perltidy",
-                "command": "--perl-best-practices --maximum-line-length=80"
+                "command": ""
             }
         ],
         "linter": [
             {
                 "image": "tadamo/perl-critic",
                 "entrypoint": "perlcritic",
-                "command": "--theme pbp"
+                "command": ""
             }
         ]
     },
