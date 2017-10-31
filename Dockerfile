@@ -1,4 +1,4 @@
-FROM debian:stretch
+FROM debian:stretch-slim
 RUN echo "OS setup" && \
     set -ex && \
     apt-get update && \
