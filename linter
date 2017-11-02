@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #set -ex
 
-file_type=$(language-type $FILE)
+file_type=$(docker run --rm -v $FILE:$FILE tadamo/geoffrey language-type $FILE)
 if [[ -z "${file_type}" ]]; then
     echo "No file type determined for $FILE."
     exit
@@ -19,7 +19,7 @@ for linter_row_config in $(echo $linter_commands | jq -rcM '.[] | @base64'); do
     image=$(echo $linter_row | jq -rcM '.image')
     entrypoint=$(echo $linter_row | jq -rcM '.entrypoint')
     command=$(echo $linter_row | jq -rcM '.command')
-    docker pull $image > /dev/null
+    #docker pull $image > /dev/null
     docker_run="docker run --rm -v $FILE:$FILE --entrypoint=$entrypoint $image $command $FILE"
     $docker_run
 done

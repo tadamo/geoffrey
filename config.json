@@ -4,7 +4,7 @@
             {
                 "image": "tadamo/perl-critic",
                 "entrypoint": "perltidy",
-                "command": ""
+                "command": "-o /dev/stdout"
             }
         ],
         "linter": [
